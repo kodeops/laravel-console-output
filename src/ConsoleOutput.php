@@ -11,6 +11,10 @@ class ConsoleOutput extends SConsoleOutput
             ray($message)->color('green');
         }
 
+        if (is_array($message)) {
+            $message = json_encode($message);
+        }
+
         return $this->writeln("<info>{$message}</info>");
     }
 
@@ -20,6 +24,10 @@ class ConsoleOutput extends SConsoleOutput
             ray($message)->color('red');
         }
 
+        if (is_array($message)) {
+            $message = json_encode($message);
+        }
+
         return $this->writeln("<error>{$message}</error>");
     }
 
@@ -27,6 +35,10 @@ class ConsoleOutput extends SConsoleOutput
     {
         if (! app()->isProduction() AND function_exists('ray')) {
             ray($message);
+        }
+
+        if (is_array($message)) {
+            $message = json_encode($message);
         }
 
         return $this->writeln("<comment>{$message}</comment>");
@@ -50,6 +62,10 @@ class ConsoleOutput extends SConsoleOutput
         if (function_exists('ray')) {
             ray($message);
         }
+
+        if (is_array($message)) {
+            $message = json_encode($message);
+        }
         
         return $this->writeln("<comment>{$message}</comment>");
     }
@@ -62,6 +78,10 @@ class ConsoleOutput extends SConsoleOutput
 
         if (function_exists('ray')) {
             ray($message)->color('green');
+        }
+
+        if (is_array($message)) {
+            $message = json_encode($message);
         }
 
         return $this->writeln("<info>{$message}</info>");
@@ -77,6 +97,10 @@ class ConsoleOutput extends SConsoleOutput
             ray($message)->color('error');
         }
 
+        if (is_array($message)) {
+            $message = json_encode($message);
+        }
+
         return $this->writeln("<error>{$message}</error>");
     }
 
@@ -88,6 +112,10 @@ class ConsoleOutput extends SConsoleOutput
 
         if (function_exists('ray')) {
             ray($message);
+        }
+
+        if (is_array($message)) {
+            $message = json_encode($message);
         }
 
         return $this->writeln("<comment>{$message}</comment>");
