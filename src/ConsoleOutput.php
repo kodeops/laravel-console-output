@@ -37,37 +37,43 @@ class ConsoleOutput extends SConsoleOutput
         Bugsnag::leaveBreadcrumb($message, $type);
     }
 
-    public function info($message)
+    public function info($message, $breadcrumb = false)
     {
         $this->ray($message, 'green');
-        $this->breadcrumb($message, Breadcrumb::LOG_TYPE);
+        if ($breadcrumb) {
+            $this->breadcrumb($message, Breadcrumb::LOG_TYPE);    
+        }
         $message = $this->convertMessageForConsole($message);
         return $this->writeln("<info>{$message}</info>");
     }
 
-    public function error($message)
+    public function error($message, $breadcrumb = false)
     {
         $this->ray($message, 'red');
-        $this->breadcrumb($message, Breadcrumb::ERROR_TYPE);
+        if ($breadcrumb) {
+            $this->breadcrumb($message, Breadcrumb::ERROR_TYPE);    
+        }
         $message = $this->convertMessageForConsole($message);
         return $this->writeln("<error>{$message}</error>");
     }
 
-    public function comment($message)
+    public function comment($message, $breadcrumb = false)
     {
         $this->ray($message);
-        $this->breadcrumb($message, Breadcrumb::LOG_TYPE);
+        if ($breadcrumb) {
+            $this->breadcrumb($message, Breadcrumb::LOG_TYPE);    
+        }
         $message = $this->convertMessageForConsole($message);
         return $this->writeln("<comment>{$message}</comment>");
     }
 
-    public function depends($message, $success)
+    public function depends($message, $success, $breadcrumb = false)
     {
         if ($success) {
-            return $this->comment($message);
+            return $this->comment($message, $breadcrumb);
         }
         
-        return $this->error($message);
+        return $this->error($message, $breadcrumb);
     }
 
     public function debug($message)
